@@ -7,7 +7,7 @@ import { useAuth, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 
 const PostCard: React.FC<{
-  post: inferProcedureOutput<AppRouter["post"]["all"]>[number];
+  post: inferProcedureOutput<AppRouter["posts"]["all"]>[number];
 }> = ({ post }) => {
   return (
     <div className="max-w-2xl rounded-lg border-2 border-gray-500 p-4 transition-all hover:scale-[101%]">
@@ -20,7 +20,9 @@ const PostCard: React.FC<{
 };
 
 const Home: NextPage = () => {
-  const postQuery = trpc.post.all.useQuery();
+  // const postQuery = trpc.post.all.useQuery();
+
+  const { data } = trpc.posts.all.useQuery();
 
   return (
     <>
@@ -36,10 +38,10 @@ const Home: NextPage = () => {
           </h1>
           <AuthShowcase />
 
-          <div className="flex h-[60vh] justify-center overflow-y-scroll px-4 text-2xl">
-            {postQuery.data ? (
+          <div className="justify-center` flex h-[60vh] px-4 text-2xl">
+            {data ? (
               <div className="flex flex-col gap-4">
-                {postQuery.data?.map((p) => {
+                {data?.map((p) => {
                   return <PostCard key={p.id} post={p} />;
                 })}
               </div>

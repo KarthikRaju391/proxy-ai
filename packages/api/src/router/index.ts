@@ -3,7 +3,7 @@ import { postRouter } from "./post";
 import { authRouter } from "./auth";
 
 export const appRouter = router({
-  post: postRouter,
+  posts: postRouter,
   auth: authRouter,
 });
 
